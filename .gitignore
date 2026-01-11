@@ -1,0 +1,35 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Environments
+.venv/
+venv/
+ENV/
+env/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Data artifacts (don’t commit large generated data)
+data/raw/*.parquet
+data/processed/*.parquet
+data/processed/models/*.joblib
+data/processed/*.csv
+
+# Allow NASA raw text + README docs
+!data/raw/nasa_cmapss/**
+
+# Reports (KEEP these as proof-of-work)
+!reports/**
+
+# Ignore large NASA artifacts
+data/raw/nasa_cmapss/CMAPSSData.zip
+data/raw/nasa_cmapss/CMAPSSData/Damage Propagation Modeling.pdf
+
