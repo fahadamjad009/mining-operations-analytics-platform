@@ -1,5 +1,13 @@
 ﻿# Mining Operations Analytics Platform (Predictive Maintenance MVP)
 
+
+
+\## Live Report (GitHub Pages)
+
+\- https://fahadamjad009.github.io/mining-operations-analytics-platform/
+
+
+
 Portfolio-grade data engineering + analytics + ML project focused on mining operations.
 This repo simulates equipment telemetry and maintenance logs, builds an analytics-ready daily KPI table, and trains a baseline model to predict **high downtime risk** for the next day.
 
@@ -93,11 +101,11 @@ uvicorn src.miningops.api:app --reload
 
 ## Example outputs
 
-\## Proof of Work (Charts)
+-Proof of Work (Charts)
 
 
 
-\### Mining Mode (Synthetic)
+-Mining Mode (Synthetic)
 
 !\[Mining Utilization by Site](reports/figures/mining\_utilization\_by\_site.png)
 
@@ -107,13 +115,13 @@ uvicorn src.miningops.api:app --reload
 
 
 
-\### NASA Benchmark Mode (C-MAPSS FD001)
+-NASA Benchmark Mode (C-MAPSS FD001)
 
 !\[NASA ROC Curve (Fail within 30 cycles)](reports/figures/nasa\_roc\_curve.png)
 
 
 
-\## Interactive Report
+-Interactive Report
 
 Open the full interactive HTML report locally:
 
