@@ -29,19 +29,21 @@ jobs:
         shell: bash
         run: |
           set -e
-          # Make repo root importable so "import src.*" works in CI
           export PYTHONPATH="$GITHUB_WORKSPACE"
           python -c "import src.miningops; print('import ok')"
 
-      - name: Run tests (if present)
+      - name: Run tests (treat 'no tests collected' as success)
         shell: bash
         run: |
-          set -e
+          set +e
+          pytest -q
+          code=$?
+          echo "pytest exit code: $code"
 
-          # If there is no tests/ folder or it has no test files,
-          # pytest exits with code 5 ("no tests collected"). We skip in that case.
-          if [ -d "tests" ] && compgen -G "tests/test*.py" > /dev/null; then
-            pytest -q
-          else
-            echo "No tests found (skipping pytest)."
+          # 0 = tests passed
+          # 5 = no tests collected (common early in MVP repos)
+          if [ "$code" -eq 0 ] || [ "$code" -eq 5 ]; then
+            exit 0
           fi
+
+          exit "$code"
