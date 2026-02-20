@@ -2,13 +2,14 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -17,6 +18,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: "pip"
 
       - name: Install dependencies
         run: |
@@ -28,5 +30,14 @@ jobs:
           python -c "from src.miningops.config import settings; print('ok', settings.project_root)"
 
       - name: Run tests (if present)
+        shell: bash
         run: |
-          pytest -q
+          set -e
+
+          # If there is no tests/ folder or it has no test files,
+          # pytest exits with code 5 ("no tests collected"). We skip in that case.
+          if [ -d "tests" ] && compgen -G "tests/test*.py" > /dev/null; then
+            pytest -q
+          else
+            echo "No tests found (skipping pytest)."
+          fi
