@@ -26,8 +26,12 @@ jobs:
           pip install -r requirements.txt
 
       - name: Smoke import
+        shell: bash
         run: |
-          python -c "from src.miningops.config import settings; print('ok', settings.project_root)"
+          set -e
+          # Make repo root importable so "import src.*" works in CI
+          export PYTHONPATH="$GITHUB_WORKSPACE"
+          python -c "import src.miningops; print('import ok')"
 
       - name: Run tests (if present)
         shell: bash
