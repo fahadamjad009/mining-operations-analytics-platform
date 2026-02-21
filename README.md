@@ -1,242 +1,177 @@
-##Mining Operations Analytics Platform
-#Predictive Maintenance Analytics & Downtime Risk Modeling
-
-A portfolio-grade data engineering + analytics + machine learning system designed to simulate real-world mining operations and predictive maintenance workflows.
-
-This project demonstrates how telemetry and maintenance logs can be transformed into analytics-ready KPIs and operational risk predictions — delivered through:
-
- Streamlit Executive Dashboard
+# Mining Operations Analytics Platform
 
- Downtime Risk ML Model
+Predictive Maintenance MVP for industrial mining equipment. This project demonstrates a production-style analytics workflow: telemetry and maintenance signals are transformed into operational KPIs, downtime-risk scoring, dashboard drilldowns, and data quality monitoring, delivered as a cloud-deployed Streamlit app.
 
- Model Evaluation & Monitoring
+## 1. Live Demo
 
- Static HTML Report (GitHub Pages)
+Streamlit App: https://fahadamjad009-mining-operations-analyt-streamlit-apphome-iuilko.streamlit.app
 
- FastAPI Scoring Endpoint
+## 2. Screenshots
 
- Live Access
- Interactive HTML Report (GitHub Pages)
+Home  
+![Home](docs/screenshots/home_page.png)
 
-https://fahadamjad009.github.io/mining-operations-analytics-platform/
+Executive Dashboard  
+![Executive Dashboard](docs/screenshots/executive_dashboard.png)
 
- Streamlit Dashboard (Cloud Deployment)
+Operations Drilldown  
+![Operations Drilldown](docs/screenshots/operations_drilldown.png)
 
-👉 Deployable via Streamlit Community Cloud
-Main file:
+Model Performance  
+![Model Performance](docs/screenshots/model_performance.png)
 
-streamlit_app/Home.py
+Data Quality  
+![Data Quality](docs/screenshots/data_quality.png)
 
-Once deployed, add your public URL here:
+## 3. Objectives
 
-https://your-app-name.streamlit.app
+1. Convert equipment telemetry and maintenance activity into daily operational KPIs.
+2. Score equipment downtime risk with an evaluation-first ML approach.
+3. Provide operational and executive dashboards for decision support.
+4. Monitor dataset health via automated data quality checks.
+5. Deploy a stable, cloud-safe Streamlit application that remains functional on cold starts.
 
-GitHub Pages hosts the static report.
-Streamlit must be deployed on Streamlit Cloud to be clickable without running locally.
+## 4. Architecture
 
-🎯 Project Objective
+### 4.1 High-level flow (diagram)
 
-Simulate an end-to-end mining analytics pipeline:
+```mermaid
+flowchart LR
+  A[Telemetry + Maintenance (synthetic/demo)] --> B[ETL / Feature Engineering]
+  B --> C[Daily KPI Table (Parquet)]
+  B --> D[Model Training (Scikit-learn)]
+  C --> E[KPI Snapshot + Top Risky Assets (CSV)]
+  D --> F[Downtime Risk Model (joblib)]
+  C --> G[Streamlit Dashboards]
+  E --> G
+  F --> G
+  G --> H[Streamlit Cloud]
 
-Generate telemetry + maintenance data
+If Mermaid is not rendered by your viewer, use this equivalent:
 
-Engineer daily KPI summaries
+Telemetry + Maintenance  ->  ETL/Features  ->  Daily KPI (Parquet)
+                                  |                 |
+                                  |                 -> KPI Snapshot + Top Risky Assets (CSV)
+                                  |
+                                  -> Model Train -> Risk Model (joblib)
+Daily KPI + CSV + Model  ->  Streamlit App (Pages)  ->  Streamlit Cloud
 
-Train a downtime-risk classifier
+### 4.2 Cloud-safe behavior
 
-Deliver operational dashboards
+Streamlit Cloud runs on a clean container. The app includes a bootstrap mechanism that:
 
-Provide scoring API endpoint
+detects missing pipeline artifacts
 
-Publish static executive report
+generates demo artifacts inside the container on demand
 
-This mirrors a real predictive maintenance system in heavy industry.
+prevents broken pages when data files are absent after redeploy/reboot
 
-🏗 Architecture
-Raw Telemetry + Maintenance Logs
-            ↓
-Data Validation & Cleaning
-            ↓
-Daily KPI Table (Analytics-Ready)
-            ↓
-Feature Engineering
-            ↓
-Downtime Risk Model (Logistic Regression)
-            ↓
-├── Streamlit Dashboard
-├── FastAPI Scoring Endpoint
-└── Static HTML Report (GitHub Pages)
-📁 Repository Structure
-mining-operations-analytics-platform/
-│
-├── data/
-│   ├── raw/
-│   └── processed/
-│       ├── daily_equipment_summary.parquet
-│       ├── kpi_snapshot.csv
-│       ├── top_risky_assets.csv
-│       └── models/
-│           └── downtime_risk_model.joblib
-│
-├── src/miningops/
-│   ├── generate_data.py
-│   ├── kpis.py
-│   ├── train.py
-│   ├── kpi_snapshot.py
-│   ├── report.py
-│   └── api.py
-│
-├── streamlit_app/
-│   ├── Home.py
-│   └── pages/
-│       ├── Executive_Dashboard.py
-│       ├── Operations_Drilldown.py
-│       ├── Model_Performance.py
-│       └── Data_Quality.py
-│
-├── reports/
-│   └── mining_ops_report.html
-│
-├── docs/
-│   └── figures/
-│
-└── README.md
-📊 Streamlit Dashboard
-1️⃣ Executive Dashboard
+## 5. Dashboard Pages
 
-Utilization KPI
+### 5.1 Executive Dashboard
 
-Downtime KPI
+KPI cards (coverage, utilization, downtime)
 
-Work order metrics
+downtime trend
 
-Top risky assets
+top risky assets (risk ranking + table)
 
-2️⃣ Operations Drilldown
+### 5.2 Operations Drilldown
 
-Site-level filtering
+filters (site, equipment type, asset, date range)
 
-Equipment-level trend analysis
+utilization and downtime trends
 
-Risk distribution view
+site comparison
 
-3️⃣ Model Performance
+top downtime assets table
 
-ROC Curve
+### 5.3 Model Performance
 
-AUC
+ROC/AUC (when both classes exist)
 
-Threshold tuning
+risk score distribution
 
-Confusion matrix
+threshold tuning
 
-Precision / Recall / F1
+confusion matrix and precision/recall/F1
 
-4️⃣ Data Quality Monitoring
+top predicted alerts table
 
-Missingness dashboard
+### 5.4 Data Quality
 
-Row volume over time
+missingness by column
 
-Basic domain range checks
+row volume over time
 
-🤖 Machine Learning
+basic range checks (utilization/downtime bounds, sensor sanity checks)
 
-Model: Logistic Regression (baseline)
-Objective: Predict high downtime severity next day
+## 6. Tech Stack
 
-Evaluation (example run)
-
-ROC AUC: ~0.67
-
-31 days simulated
-
-100 assets
-
-Mean risk score ≈ 0.18
-
-Downtime rate ≈ 3%
-
-Threshold control implemented inside dashboard for operational tuning.
-
-📈 Static Executive Report
-
-Automatically generated HTML report:
-
-reports/mining_ops_report.html
-
-Contains:
-
-Utilization by site
-
-Downtime trends
-
-Top risky assets
-
-NASA benchmark comparison
-
-Model evaluation plots
-
-Hosted via GitHub Pages.
-
-⚡ API Endpoint
-
-Run locally:
-
-uvicorn src.miningops.api:app --reload
-
-Provides:
-
-JSON scoring endpoint
-
-Risk prediction on new KPI inputs
-
-Production-style inference example
-
-🧰 Tech Stack
-
-Python 3.11
-
-Pandas / NumPy
-
-PyArrow
-
-Scikit-learn
-
-Plotly
+Python 3.11 (runtime pinned for Streamlit Cloud)
 
 Streamlit
 
-FastAPI
+Pandas, NumPy
 
-Uvicorn
+Scikit-learn, Joblib
 
-🚀 Local Setup
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+Plotly
+
+Parquet via PyArrow
+
+## 7. Repository Structure
+mining-operations-analytics-platform/
+├── streamlit_app/
+│   ├── Home.py
+│   ├── bootstrap.py
+│   └── pages/
+│       ├── 1_Executive_Dashboard.py
+│       ├── 2_Operations_Drilldown.py
+│       ├── 3_Model_Performance.py
+│       └── 4_Data_Quality.py
+├── src/
+│   └── miningops/
+├── data/
+├── docs/
+│   └── screenshots/
+├── requirements.txt
+└── runtime.txt
+
+## 8. Running Locally
+
+### 8.1 Setup
+
+git clone https://github.com/fahadamjad009/mining-operations-analytics-platform.git
+cd mining-operations-analytics-platform
 pip install -r requirements.txt
 
-Generate pipeline:
+### 8.2 Generate demo data (local)
 
 python -m src.miningops.generate_data
 python -m src.miningops.kpis
 python -m src.miningops.train
-python -m src.miningops.kpi_snapshot
-python -m src.miningops.report
 
-Run dashboard:
+### 8.3 Start the app
 
 streamlit run streamlit_app/Home.py
-🏆 What This Project Signals
 
-Production-style data pipeline thinking
+## 9. Notes on Deployment Stability
 
-KPI engineering for industrial systems
+Python version is pinned via runtime.txt to avoid dependency breakage.
 
-Model evaluation transparency
+Dependencies are pinned in requirements.txt.
 
-Dashboard delivery for stakeholders
+A stable baseline is tagged in Git as savepoint-streamlit-stable-2026-02-22.
 
-End-to-end reproducibility
+## 10. Future Enhancements
 
-Clean documentation and architecture
+ingest real telemetry streams
+
+monitoring and drift detection
+
+alert routing (email/ops tools)
+
+multi-site scaling and role-based views
+
+evaluation dashboards with experiment tracking
