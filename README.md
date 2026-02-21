@@ -1,5 +1,5 @@
-Mining Operations Analytics Platform
-Predictive Maintenance Analytics & Downtime Risk Modeling
+##Mining Operations Analytics Platform
+#Predictive Maintenance Analytics & Downtime Risk Modeling
 
 A portfolio-grade data engineering + analytics + machine learning system designed to simulate real-world mining operations and predictive maintenance workflows.
 
