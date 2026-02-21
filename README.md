@@ -1,141 +1,242 @@
-﻿# Mining Operations Analytics Platform (Predictive Maintenance MVP)
+Mining Operations Analytics Platform
+Predictive Maintenance Analytics & Downtime Risk Modeling
 
+A portfolio-grade data engineering + analytics + machine learning system designed to simulate real-world mining operations and predictive maintenance workflows.
 
+This project demonstrates how telemetry and maintenance logs can be transformed into analytics-ready KPIs and operational risk predictions — delivered through:
 
-\## Live Report (GitHub Pages)
+ Streamlit Executive Dashboard
 
-\- https://fahadamjad009.github.io/mining-operations-analytics-platform/
+ Downtime Risk ML Model
 
+ Model Evaluation & Monitoring
 
+ Static HTML Report (GitHub Pages)
 
-Portfolio-grade data engineering + analytics + ML project focused on mining operations.
-This repo simulates equipment telemetry and maintenance logs, builds an analytics-ready daily KPI table, and trains a baseline model to predict **high downtime risk** for the next day.
+ FastAPI Scoring Endpoint
 
-## What this demonstrates
+ Live Access
+ Interactive HTML Report (GitHub Pages)
 
-* **Data Engineering:** ingestion, validation, transformations, analytics-ready tables (medallion-style)
-* **Analytics:** utilization, downtime rate, work-order volume, top risky assets
-* **Machine Learning:** baseline downtime risk model with evaluation and an API scoring endpoint
-* **Delivery:** reproducible runs, clear outputs, documentation structure
+https://fahadamjad009.github.io/mining-operations-analytics-platform/
 
-## Architecture (MVP)
+ Streamlit Dashboard (Cloud Deployment)
 
-Raw data → Validation → Daily KPI table → Feature engineering → Model training → API scoring
+👉 Deployable via Streamlit Community Cloud
+Main file:
 
-* data/raw/telemetry.parquet
-* data/raw/maintenance.parquet
-* data/processed/daily\_equipment\_summary.parquet
-* data/processed/kpi\_snapshot.csv
-* data/processed/top\_risky\_assets.csv
-* data/processed/models/downtime\_risk\_model.joblib
+streamlit_app/Home.py
 
-## Tech stack
+Once deployed, add your public URL here:
 
-Python, Pandas, NumPy, PyArrow, Pydantic, Scikit-learn, FastAPI, Uvicorn
+https://your-app-name.streamlit.app
 
-## Quickstart (Windows / PowerShell)
+GitHub Pages hosts the static report.
+Streamlit must be deployed on Streamlit Cloud to be clickable without running locally.
 
-From repo root:
+🎯 Project Objective
 
-`powershell
-python -m venv .venv
-..venv\\Scripts\\Activate.ps1
-pip install -r requirements.txt
+Simulate an end-to-end mining analytics pipeline:
 
-@"
+Generate telemetry + maintenance data
 
-# Mining Operations Analytics Platform (Predictive Maintenance MVP)
+Engineer daily KPI summaries
 
-Portfolio-grade data engineering + analytics + ML project focused on mining operations.
-This repo simulates equipment telemetry and maintenance logs, builds an analytics-ready daily KPI table, and trains a baseline model to predict **high downtime risk** for the next day.
+Train a downtime-risk classifier
 
-## What this demonstrates
+Deliver operational dashboards
 
-* **Data Engineering:** ingestion, validation, transformations, analytics-ready tables (medallion-style)
-* **Analytics:** utilization, downtime rate, work-order volume, top risky assets
-* **Machine Learning:** baseline downtime risk model with evaluation and an API scoring endpoint
-* **Delivery:** reproducible runs, clear outputs, documentation structure
+Provide scoring API endpoint
 
-## Architecture (MVP)
+Publish static executive report
 
-Raw data → Validation → Daily KPI table → Feature engineering → Model training → API scoring
+This mirrors a real predictive maintenance system in heavy industry.
 
-* data/raw/telemetry.parquet
-* data/raw/maintenance.parquet
-* data/processed/daily\_equipment\_summary.parquet
-* data/processed/kpi\_snapshot.csv
-* data/processed/top\_risky\_assets.csv
-* data/processed/models/downtime\_risk\_model.joblib
+🏗 Architecture
+Raw Telemetry + Maintenance Logs
+            ↓
+Data Validation & Cleaning
+            ↓
+Daily KPI Table (Analytics-Ready)
+            ↓
+Feature Engineering
+            ↓
+Downtime Risk Model (Logistic Regression)
+            ↓
+├── Streamlit Dashboard
+├── FastAPI Scoring Endpoint
+└── Static HTML Report (GitHub Pages)
+📁 Repository Structure
+mining-operations-analytics-platform/
+│
+├── data/
+│   ├── raw/
+│   └── processed/
+│       ├── daily_equipment_summary.parquet
+│       ├── kpi_snapshot.csv
+│       ├── top_risky_assets.csv
+│       └── models/
+│           └── downtime_risk_model.joblib
+│
+├── src/miningops/
+│   ├── generate_data.py
+│   ├── kpis.py
+│   ├── train.py
+│   ├── kpi_snapshot.py
+│   ├── report.py
+│   └── api.py
+│
+├── streamlit_app/
+│   ├── Home.py
+│   └── pages/
+│       ├── Executive_Dashboard.py
+│       ├── Operations_Drilldown.py
+│       ├── Model_Performance.py
+│       └── Data_Quality.py
+│
+├── reports/
+│   └── mining_ops_report.html
+│
+├── docs/
+│   └── figures/
+│
+└── README.md
+📊 Streamlit Dashboard
+1️⃣ Executive Dashboard
 
-## Tech stack
+Utilization KPI
 
-Python, Pandas, NumPy, PyArrow, Pydantic, Scikit-learn, FastAPI, Uvicorn
+Downtime KPI
 
-## Quickstart (Windows / PowerShell)
+Work order metrics
 
-From repo root:
+Top risky assets
 
-python -m venv .venv  
-..venv\\Scripts\\Activate.ps1  
-pip install -r requirements.txt
+2️⃣ Operations Drilldown
 
-### Generate synthetic mining data
+Site-level filtering
 
-python -m src.miningops.generate\_data
+Equipment-level trend analysis
 
-### Build daily KPI table
+Risk distribution view
 
-python -m src.miningops.kpis
+3️⃣ Model Performance
 
-### Train downtime risk model
+ROC Curve
 
-python -m src.miningops.train
+AUC
 
-### Generate executive KPI snapshot
+Threshold tuning
 
-python -m src.miningops.kpi\_snapshot
+Confusion matrix
 
-### Run API
+Precision / Recall / F1
+
+4️⃣ Data Quality Monitoring
+
+Missingness dashboard
+
+Row volume over time
+
+Basic domain range checks
+
+🤖 Machine Learning
+
+Model: Logistic Regression (baseline)
+Objective: Predict high downtime severity next day
+
+Evaluation (example run)
+
+ROC AUC: ~0.67
+
+31 days simulated
+
+100 assets
+
+Mean risk score ≈ 0.18
+
+Downtime rate ≈ 3%
+
+Threshold control implemented inside dashboard for operational tuning.
+
+📈 Static Executive Report
+
+Automatically generated HTML report:
+
+reports/mining_ops_report.html
+
+Contains:
+
+Utilization by site
+
+Downtime trends
+
+Top risky assets
+
+NASA benchmark comparison
+
+Model evaluation plots
+
+Hosted via GitHub Pages.
+
+⚡ API Endpoint
+
+Run locally:
 
 uvicorn src.miningops.api:app --reload
 
-## Example outputs
+Provides:
 
--Proof of Work (Charts)
+JSON scoring endpoint
 
+Risk prediction on new KPI inputs
 
+Production-style inference example
 
--Mining Mode (Synthetic)
+🧰 Tech Stack
 
-!\[Mining Utilization by Site](reports/figures/mining\_utilization\_by\_site.png)
+Python 3.11
 
+Pandas / NumPy
 
+PyArrow
 
-!\[Mining Top 10 Risky Assets](reports/figures/mining\_top10\_risky\_assets.png)
+Scikit-learn
 
+Plotly
 
+Streamlit
 
--NASA Benchmark Mode (C-MAPSS FD001)
+FastAPI
 
-!\[NASA ROC Curve (Fail within 30 cycles)](reports/figures/nasa\_roc\_curve.png)
+Uvicorn
 
+🚀 Local Setup
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
 
+Generate pipeline:
 
--Interactive Report
+python -m src.miningops.generate_data
+python -m src.miningops.kpis
+python -m src.miningops.train
+python -m src.miningops.kpi_snapshot
+python -m src.miningops.report
 
-Open the full interactive HTML report locally:
+Run dashboard:
 
-\- reports/mining\_ops\_report.html
+streamlit run streamlit_app/Home.py
+🏆 What This Project Signals
 
+Production-style data pipeline thinking
 
+KPI engineering for industrial systems
 
-* Days covered: 31
-* Assets covered: 100
-* Avg utilization rate: ~0.88
-* Avg downtime rate: ~0.03
-* Baseline model ROC AUC: ~0.61
+Model evaluation transparency
 
-## License
+Dashboard delivery for stakeholders
 
-MIT
+End-to-end reproducibility
 
+Clean documentation and architecture
