@@ -41,13 +41,25 @@ for p in [kpi_snapshot_path, top_risky_path, daily_summary_path]:
     if not p.exists():
         missing.append(str(p))
 
+# ✅ UPDATED: Cloud-friendly guidance + keep local CLI guidance
 if missing:
-    st.error("Missing pipeline outputs. Run:\n"
-             "`python -m src.miningops.generate_data`\n"
-             "`python -m src.miningops.kpis`\n"
-             "`python -m src.miningops.train`\n"
-             "`python -m src.miningops.kpi_snapshot`")
-    st.code("\n".join(missing))
+    st.error("Missing pipeline outputs.")
+
+    # Streamlit Cloud-friendly path
+    st.markdown("➡️ **If you are on Streamlit Cloud:** go to **Home** and click **Generate demo data now**.")
+
+    # Local dev path (your original instructions, kept)
+    st.markdown("**If running locally:** run the pipeline:")
+    st.code(
+        "python -m src.miningops.generate_data\n"
+        "python -m src.miningops.kpis\n"
+        "python -m src.miningops.train\n"
+        "python -m src.miningops.kpi_snapshot",
+        language="text",
+    )
+
+    st.markdown("**Missing files:**")
+    st.code("\n".join(missing), language="text")
     st.stop()
 
 # ---------- KPI Cards ----------

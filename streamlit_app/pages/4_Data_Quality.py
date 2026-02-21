@@ -16,12 +16,23 @@ st.caption("Monitor missingness, row volume, and basic range checks for the mini
 # -------------------------------------------------
 # Load data
 # -------------------------------------------------
+# ✅ UPDATED: Cloud-friendly guidance + keep local CLI guidance
 if not DAILY_PATH.exists():
-    st.error("Missing daily summary. Run pipeline first:")
+    st.error("Missing daily summary (pipeline output).")
+
+    # Streamlit Cloud-friendly path
+    st.markdown("➡️ **If you are on Streamlit Cloud:** go to **Home** and click **Generate demo data now**.")
+
+    # Local dev path (your original instructions, kept)
+    st.markdown("**If running locally:** run pipeline first:")
     st.code(
         "python -m src.miningops.generate_data\n"
-        "python -m src.miningops.kpis"
+        "python -m src.miningops.kpis",
+        language="text",
     )
+
+    st.markdown("**Expected file:**")
+    st.code(str(DAILY_PATH), language="text")
     st.stop()
 
 df = pd.read_parquet(DAILY_PATH)

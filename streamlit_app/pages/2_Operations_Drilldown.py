@@ -12,9 +12,14 @@ DAILY_PATH = ROOT / "data" / "processed" / "daily_equipment_summary.parquet"
 st.title("Operations Drilldown")
 st.caption("Filter by site / equipment type / asset and explore utilization & downtime patterns.")
 
+# ✅ UPDATED: Cloud-friendly guidance + keep local CLI guidance
 if not DAILY_PATH.exists():
-    st.error("Missing daily summary. Run: `python -m src.miningops.kpis`")
-    st.code(str(DAILY_PATH))
+    st.error("Missing daily summary (pipeline output).")
+    st.markdown("➡️ **If you are on Streamlit Cloud:** go to **Home** and click **Generate demo data now**.")
+    st.markdown("**If running locally:** run:")
+    st.code("python -m src.miningops.kpis", language="text")
+    st.markdown("**Expected file:**")
+    st.code(str(DAILY_PATH), language="text")
     st.stop()
 
 df = pd.read_parquet(DAILY_PATH)
@@ -49,7 +54,10 @@ date_range = st.sidebar.slider(
     max_value=max_date.to_pydatetime(),
     value=(min_date.to_pydatetime(), max_date.to_pydatetime()),
 )
-filtered = filtered[(filtered["date"] >= pd.to_datetime(date_range[0])) & (filtered["date"] <= pd.to_datetime(date_range[1]))]
+filtered = filtered[
+    (filtered["date"] >= pd.to_datetime(date_range[0]))
+    & (filtered["date"] <= pd.to_datetime(date_range[1]))
+]
 
 # ---- Summary row ----
 c1, c2, c3, c4 = st.columns(4)
@@ -78,12 +86,24 @@ trend = (
 left, right = st.columns(2)
 
 with left:
-    fig_u = px.line(trend, x="date", y="utilization_rate", markers=True, title="Utilization rate (avg)")
+    fig_u = px.line(
+        trend,
+        x="date",
+        y="utilization_rate",
+        markers=True,
+        title="Utilization rate (avg)",
+    )
     fig_u.update_yaxes(tickformat=".0%")
     st.plotly_chart(fig_u, use_container_width=True)
 
 with right:
-    fig_d = px.line(trend, x="date", y="downtime_rate", markers=True, title="Downtime rate (avg)")
+    fig_d = px.line(
+        trend,
+        x="date",
+        y="downtime_rate",
+        markers=True,
+        title="Downtime rate (avg)",
+    )
     fig_d.update_yaxes(tickformat=".0%")
     st.plotly_chart(fig_d, use_container_width=True)
 

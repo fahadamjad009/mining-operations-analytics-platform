@@ -23,14 +23,22 @@ st.caption("Evaluate downtime-risk classifier with ROC/AUC, thresholding, confus
 
 missing = [p for p in [MODEL_PATH, DAILY_PATH] if not p.exists()]
 if missing:
-    st.error("Missing model or daily summary outputs. Run:")
+    st.error("Missing model or daily summary outputs.")
+
+    # ✅ Streamlit Cloud-friendly guidance
+    st.markdown("➡️ **If you are on Streamlit Cloud:** go to **Home** and click **Generate demo data now**.")
+
+    # ✅ Local dev guidance (your original instructions, kept)
+    st.markdown("**If running locally:** run:")
     st.code(
         "python -m src.miningops.generate_data\n"
         "python -m src.miningops.kpis\n"
-        "python -m src.miningops.train"
+        "python -m src.miningops.train",
+        language="text",
     )
+
     st.write("Missing files:")
-    st.code("\n".join(str(p) for p in missing))
+    st.code("\n".join(str(p) for p in missing), language="text")
     st.stop()
 
 model = joblib.load(MODEL_PATH)
@@ -102,7 +110,7 @@ if expected is None:
 missing_cols = [c for c in expected if c not in df.columns]
 if missing_cols:
     st.error("This model expects columns that are missing from the daily summary:")
-    st.code("\n".join(missing_cols))
+    st.code("\n".join(missing_cols), language="text")
     st.info(
         "Fix: ensure your training and KPI generation produce the same columns, "
         "then re-run: python -m src.miningops.kpis and python -m src.miningops.train"
