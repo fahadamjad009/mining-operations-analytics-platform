@@ -1,6 +1,6 @@
-# Mining Operations Analytics Platform
+﻿# Mining Operations Analytics Platform
 
-Predictive Maintenance MVP for industrial mining equipment. This project demonstrates a production-style analytics workflow where telemetry and maintenance signals are transformed into operational KPIs, downtime-risk scoring, executive dashboards, and data quality monitoring — delivered via a cloud-deployed Streamlit application.
+Predictive Maintenance MVP for industrial mining equipment. This project demonstrates a production-style analytics workflow where telemetry and maintenance signals are transformed into operational KPIs, downtime-risk scoring, executive dashboards, and data quality monitoring â€” delivered via a cloud-deployed Streamlit application.
 
 ---
 
@@ -14,19 +14,19 @@ https://fahadamjad009-mining-operations-analyt-streamlit-apphome-iuilko.streamli
 ## 2. Screenshots
 
 ### Home
-![Home](docs/screenshots/home_page.png)
+![Home](docs/screenshots/01-home.png)
 
 ### Executive Dashboard
-![Executive Dashboard](docs/screenshots/executive_dashboard.png)
+![Executive Dashboard](docs/screenshots/02-executive-dashboard.png)
 
 ### Operations Drilldown
-![Operations Drilldown](docs/screenshots/operations_drilldown.png)
+![Operations Drilldown](docs/screenshots/03-operations-drilldown.png)
 
 ### Model Performance
-![Model Performance](docs/screenshots/model_performance.png)
+![Model Performance](docs/screenshots/04-model-performance.png)
 
 ### Data Quality
-![Data Quality](docs/screenshots/data_quality.png)
+![Data Quality](docs/screenshots/05-data-quality.png)
 
 ---
 
@@ -61,15 +61,15 @@ flowchart LR
 
 ```
 Telemetry + Maintenance
-        ↓
+        â†“
 ETL / Feature Engineering
-        ↓
+        â†“
 Daily KPI Table (Parquet)
-        ├── KPI Snapshot (CSV)
-        └── Model Training → Risk Model (joblib)
-                    ↓
+        â”œâ”€â”€ KPI Snapshot (CSV)
+        â””â”€â”€ Model Training â†’ Risk Model (joblib)
+                    â†“
               Streamlit App
-                    ↓
+                    â†“
               Streamlit Cloud
 ```
 
@@ -133,25 +133,25 @@ Streamlit Cloud runs on a clean container. The application includes a bootstrap 
 
 ```
 mining-operations-analytics-platform/
-│
-├── streamlit_app/
-│   ├── Home.py
-│   ├── bootstrap.py
-│   └── pages/
-│       ├── 1_Executive_Dashboard.py
-│       ├── 2_Operations_Drilldown.py
-│       ├── 3_Model_Performance.py
-│       └── 4_Data_Quality.py
-│
-├── src/
-│   └── miningops/
-│
-├── data/
-├── docs/
-│   └── screenshots/
-│
-├── requirements.txt
-└── runtime.txt
+â”‚
+â”œâ”€â”€ streamlit_app/
+â”‚   â”œâ”€â”€ Home.py
+â”‚   â”œâ”€â”€ bootstrap.py
+â”‚   â””â”€â”€ pages/
+â”‚       â”œâ”€â”€ 1_Executive_Dashboard.py
+â”‚       â”œâ”€â”€ 2_Operations_Drilldown.py
+â”‚       â”œâ”€â”€ 3_Model_Performance.py
+â”‚       â””â”€â”€ 4_Data_Quality.py
+â”‚
+â”œâ”€â”€ src/
+â”‚   â””â”€â”€ miningops/
+â”‚
+â”œâ”€â”€ data/
+â”œâ”€â”€ docs/
+â”‚   â””â”€â”€ screenshots/
+â”‚
+â”œâ”€â”€ requirements.txt
+â””â”€â”€ runtime.txt
 ```
 
 ---
@@ -204,4 +204,5 @@ savepoint-streamlit-stable-2026-02-22
 - Experiment tracking dashboard  
 
 ---
+
 
