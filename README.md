@@ -45,6 +45,7 @@ https://fahadamjad009-mining-operations-analyt-streamlit-apphome-iuilko.streamli
 ### 4.1 High-Level Flow
 
 ```mermaid
+
 flowchart LR
   A[Telemetry + Maintenance Data] --> B[ETL and Feature Engineering]
   B --> C[Daily KPI Table (Parquet)]
@@ -55,21 +56,27 @@ flowchart LR
   E --> G
   F --> G
   G --> H[Streamlit Cloud]
+
 ```
+
 
 ### Text fallback (if Mermaid does not render)
 
 ```
 Telemetry + Maintenance
-        â†“
+        |
+        v
 ETL / Feature Engineering
-        â†“
+        |
+        v
 Daily KPI Table (Parquet)
-        â”œâ”€â”€ KPI Snapshot (CSV)
-        â””â”€â”€ Model Training â†’ Risk Model (joblib)
-                    â†“
+        |-- KPI Snapshot (CSV)
+        `-- Model Training -> Risk Model (joblib)
+                    |
+                    v
               Streamlit App
-                    â†“
+                    |
+                    v
               Streamlit Cloud
 ```
 
@@ -133,25 +140,25 @@ Streamlit Cloud runs on a clean container. The application includes a bootstrap 
 
 ```
 mining-operations-analytics-platform/
-â”‚
-â”œâ”€â”€ streamlit_app/
-â”‚   â”œâ”€â”€ Home.py
-â”‚   â”œâ”€â”€ bootstrap.py
-â”‚   â””â”€â”€ pages/
-â”‚       â”œâ”€â”€ 1_Executive_Dashboard.py
-â”‚       â”œâ”€â”€ 2_Operations_Drilldown.py
-â”‚       â”œâ”€â”€ 3_Model_Performance.py
-â”‚       â””â”€â”€ 4_Data_Quality.py
-â”‚
-â”œâ”€â”€ src/
-â”‚   â””â”€â”€ miningops/
-â”‚
-â”œâ”€â”€ data/
-â”œâ”€â”€ docs/
-â”‚   â””â”€â”€ screenshots/
-â”‚
-â”œâ”€â”€ requirements.txt
-â””â”€â”€ runtime.txt
+|
+|-- streamlit_app/
+|   |-- Home.py
+|   |-- bootstrap.py
+|   `-- pages/
+|       |-- 1_Executive_Dashboard.py
+|       |-- 2_Operations_Drilldown.py
+|       |-- 3_Model_Performance.py
+|       `-- 4_Data_Quality.py
+|
+|-- src/
+|   `-- miningops/
+|
+|-- data/
+|-- docs/
+|   `-- screenshots/
+|
+|-- requirements.txt
+`-- runtime.txt
 ```
 
 ---
