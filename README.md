@@ -43,7 +43,9 @@ https://fahadamjad009-mining-operations-analyt-streamlit-apphome-iuilko.streamli
 ## 4. Architecture
 
 ### 4.1 High-Level Flow
+
 ```mermaid
+
 flowchart LR
   A[Telemetry + Maintenance Data] --> B[ETL and Feature Engineering]
   B --> C[Daily KPI Table (Parquet)]
@@ -54,7 +56,7 @@ flowchart LR
   E --> G
   F --> G
   G --> H[Streamlit Cloud]
-  ...
+  
 ```
 ### Text fallback (if Mermaid does not render)
 
