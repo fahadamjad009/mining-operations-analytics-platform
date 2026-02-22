@@ -1,6 +1,6 @@
 ﻿# Mining Operations Analytics Platform
 
-Predictive Maintenance MVP for industrial mining equipment. This project demonstrates a production-style analytics workflow where telemetry and maintenance signals are transformed into operational KPIs, downtime-risk scoring, executive dashboards, and data quality monitoring â€” delivered via a cloud-deployed Streamlit application.
+Predictive Maintenance MVP for industrial mining equipment. This project demonstrates a production-style analytics workflow where telemetry and maintenance signals are transformed into operational KPIs, downtime-risk scoring, executive dashboards, and data quality monitoring - delivered via a cloud-deployed Streamlit application.
 
 ---
 
@@ -45,7 +45,6 @@ https://fahadamjad009-mining-operations-analyt-streamlit-apphome-iuilko.streamli
 ### 4.1 High-Level Flow
 
 ```mermaid
-
 flowchart LR
   A[Telemetry + Maintenance Data] --> B[ETL and Feature Engineering]
   B --> C[Daily KPI Table (Parquet)]
@@ -56,9 +55,7 @@ flowchart LR
   E --> G
   F --> G
   G --> H[Streamlit Cloud]
-
 ```
-
 
 ### Text fallback (if Mermaid does not render)
 
