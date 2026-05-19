@@ -32,22 +32,37 @@ Built on the **NASA C-MAPSS turbofan benchmark** recast into mining ops framing 
 
 ## Screenshots
 
-_Screenshots reflect baseline pages; latest tab structure and Tier 2/3 features (SHAP, drift detection, risk heatmap, what-if simulator) are best viewed in the live demo._
-
 ### Home
 ![Home](docs/screenshots/01-home.png)
 
-### Executive Dashboard
+### Executive Dashboard — OEE & Reliability
 ![Executive Dashboard](docs/screenshots/02-executive-dashboard.png)
 
-### Operations Drilldown
+### Operations Drilldown — Risk Heatmap
 ![Operations Drilldown](docs/screenshots/03-operations-drilldown.png)
 
-### Model Performance
+### Model Performance — SHAP Per-Asset Waterfall
 ![Model Performance](docs/screenshots/04-model-performance.png)
 
-### Data Quality
+### Data Quality — Distribution Drift Detection
 ![Data Quality](docs/screenshots/05-data-quality.png)
+
+### What-If Simulator — Interactive Risk Scoring
+![What-If Simulator](docs/screenshots/06-what-if-simulator.png)
+
+---
+
+### Feature highlights
+
+**Cost Impact analysis** (Executive Dashboard → Cost Impact tab): $450M annualized cost → $315M avoidable at 70% model catch rate, with configurable $/hour and catch-rate sliders.
+![Cost Impact](docs/screenshots/07-cost-impact.png)
+
+**Downtime Pareto** (Executive Dashboard → Downtime Pareto tab): classic 80/20 — 74 of 100 assets account for 80% of downtime, with cumulative threshold line.
+![Downtime Pareto](docs/screenshots/08-downtime-pareto.png)
+
+**Per-point SHAP explanation** (What-If Simulator): for any slider configuration, on-demand local explanation showing exactly which feature values push risk up (red) or down (blue) from baseline.
+![What-If SHAP explanation](docs/screenshots/09-whatif-shap-explanation.png)
+
 
 ---
 
@@ -162,7 +177,7 @@ App opens at `http://localhost:8501`.
 - [x] **Tier 3** — Risk heatmap (Operations Drilldown)
 - [x] **Tier 3** — KS-test drift detection (Data Quality)
 - [x] **Tier 3** — What-If Simulator with live SHAP local explanations
-- [ ] Refresh screenshots to reflect Tier 2/3 features
+- [x] Refresh screenshots to reflect Tier 2/3 features
 - [ ] Real-time telemetry ingestion (Kafka or polling)
 - [ ] Drift-triggered automated retraining loop
 - [ ] Alert routing (email / Slack / PagerDuty)
